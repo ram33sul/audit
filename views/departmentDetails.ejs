@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/table.css" />
+    <title>Document</title>
+</head>
+<body>
+    <div style="margin: auto; width: fit-content;
+    margin-top: 30px; font-weight: bold;">
+        <%= data.name %>
+    </div>
+    <form class="add-type-of-audit" action="/admin/addHint?id=<%= data._id %>" method="post" style="width: fit-content; margin: auto;">
+        <input placeholder="type hint" class="input" name="hint"/>
+        <button class="addBtn" >
+            Add
+        </button>
+        <a href="/admin/departments" style="border: 1px solid silver; padding: 10px; border-radius: 10px; color: black; margin-top: 10px; width: fit-content;">
+            go back
+        </a>
+    </form>
+    <div class="table">
+        <div class="tr">
+            <div class="th" style="width: 400px;">
+                hint
+            </div>
+            <div class="th">
+                Actions
+            </div>
+        </div>
+        <% data.hints.forEach((hint) => { %>
+                <div class="tr">
+                    <div class="tb" style="width: 400px;">
+                        <%= hint %>
+                    </div>
+                    <div class="tb">
+                        <a href="/admin/deleteHint?id=<%= data._id %>&hint=<%= hint %>">
+                            <div class="btn background-red">
+                                Delete
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        <% }) %>
+    </div>
+</body>
+</html>

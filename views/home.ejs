@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>corodex audit</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="shortcut icon" href="/" />
+  </head>
+  <body>
+    <div class="loaderModified" id="loader">
+      <div class="loaderModified-item">
+
+      </div>
+    </div>
+    <div class="main-panel" style="width: 100%; height: 100vh;">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-6 grid-margin stretch-card" style="margin: auto;">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Internal audit findings report</h4>
+
+                <form class="forms-sample" id="report-form" name="report-form" action="/report" method="post" onsubmit="handleSubmit(event)">
+
+                  <div class="form-group">
+                    <label class="labelModified">Department</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" onclick="dropdownClick('departmentContainer')" type="button">Select</button>
+                        <div class="dropdown-menu" id="departmentContainer" >
+                          <% departments.forEach((department) => { %>
+                            <a href="/departmentDropdownSelect?id=<%= department._id %>">
+                          <div class="dropdown-item" ><%= department.name %></div>
+                          </a>
+                          <% }) %>
+                        </div>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Text input with dropdown button" name="department" id="department" value="<%= currentDepartment?.name ?? '' %>" onfocus="dropdownInputFocus('departmentContainer')">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Type of Audit</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" onclick="dropdownClick('typeOfAuditContainer')" type="button">Select</button>
+                        <div class="dropdown-menu" id="typeOfAuditContainer">
+                          <% typeOfAudit.forEach((type) => { %>
+                          <div class="dropdown-item" onclick="dropdownSelected('typeOfAuditContainer', '<%= type.name %>', 'typeOfAudit')"><%= type.name %></div>
+                          <% }) %>
+                        </div>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Text input with dropdown button" name="typeOfAudit" id="typeOfAudit" onfocus="dropdownInputFocus('typeOfAuditContainer')">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Division</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="division"
+                      placeholder="Division"
+                      name="division"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Area</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="area"
+                      placeholder="Area"
+                      name="area"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Audit Reference</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="auditReference"
+                      placeholder="Audit Reference"
+                      name="auditReference"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Auditor</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="auditor"
+                      placeholder="Auditor"
+                      name="auditor"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Auditee/s</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="auditee"
+                      placeholder="Auditee/s"
+                      name="auditee"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="labelModified">Audit Objectives</label>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      id="auditObjectives"
+                      placeholder="Audit Objectives"
+                      style="height: 100px;"
+                      name="auditObjectives"
+                    ></textarea>
+                  </div>
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 20px;">
+                    <label class="labelModified" style="font-weight: bold;">Previous findings</label>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Total NCRs</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="previousTotal"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="previousTotal"
+                    />
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Closed NCRs</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="previousClosed"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="previousClosed"
+                    />
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Pending NCRs</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="previousPending"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="previousPending"
+                    />
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Observations</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="previousObservations"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="previousObservations"
+                    />
+                    </div>
+                  </div>
+                  <div class="form-group" style="display: flex; flex-direction: column; gap: 20px;">
+                    <label class="labelModified" style="font-weight: bold;">Present findings</label>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Total NCRs</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="presentTotal"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="presentTotal"
+                    />
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                      <label class="labelModified" style="width: 100px;">Observations</label>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="presentObservations"
+                      placeholder="0"
+                      style="width: 100px;"
+                      name="presentObservations"
+                    />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div style="display: flex; gap: 10px; position: relative;">
+                      <label class="labelModified">Audit Findings</label>
+                      <div class="hintModified" id="hintModified" onclick="hintClick()">
+                        !
+                      </div>
+                      <div class="hintsContainer" id="hintsContainer">
+                        <% currentDepartment?.hints?.forEach((hint) => { %>
+                        <div>
+                          <%= hint %>
+                        </div>
+                        <% }) %>
+                      </div>
+                    </div>
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      id="auditFindings"
+                      placeholder="Audit Findings"
+                      style="height: 200px;"
+                      name="auditFindings"
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary mr-2">
+                    Print Report
+                  </button>
+                  <a href="/">
+                  <button type="button" class="btn btn-light">Cancel</button>
+                  </a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/script/script.js"></script>
+  </body>
+</html>

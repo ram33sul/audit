@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/table.css" />
+    <title>Document</title>
+</head>
+<body>
+    <form class="add-type-of-audit" action="/admin/addTypeOfAudit" method="post" style="width: fit-content; margin: auto;">
+        <input placeholder="Audit type name" class="input" name="name"/>
+        <button class="addBtn" >
+            Add
+        </button>
+        <a href="/admin" style="border: 1px solid silver; padding: 10px; border-radius: 10px; margin-top: 10px;width: fit-content; color: black;">
+            go back
+        </a>
+    </form>
+    <div class="table">
+        <div class="tr">
+            <div class="th">
+                Id
+            </div>
+            <div class="th">
+                Type
+            </div>
+            <div class="th">
+                Status
+            </div>
+            <div class="th">
+                Actions
+            </div>
+        </div>
+        <% data.forEach((type) => { %>
+        <div class="tr">
+            <div class="tb">
+                <%= type._id.toString().slice(13) %>
+            </div>
+            <div class="tb">
+                <%= type.name %>
+            </div>
+            <div class="tb">
+                <% if(type.status) { %>
+                    <div class="status-text active">
+                        Active
+                    </div>
+                <% } else { %>
+                    <div class="status-text">
+                        Inactive
+                    </div>
+                <% } %>
+            </div>
+            <div class="tb">
+                <% if(type.status) { %>
+                <a href="/admin/deactivateTypeOfAudit?id=<%= type._id %>">
+                    <div class="btn background-red">
+                        Deactivate
+                    </div>
+                </a>
+                <% } else { %>
+                <a href="/admin/activateTypeOfAudit?id=<%= type._id %>">
+                    <div class="btn background-green">
+                        Activate
+                    </div>
+                </a>
+                <% } %>
+                <a href="/admin/deleteTypeOfAudit?id=<%= type._id %>">
+                    <div class="btn background-red">
+                        Delete
+                    </div>
+                </a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</body>
+</html>

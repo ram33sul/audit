@@ -1,0 +1,114 @@
+a {
+    text-decoration: none;
+    display: flex;
+    color: black;
+}
+
+.addBtn {
+    margin: auto;
+    margin-top: 50px;
+    width: fit-content;
+    padding: 10px 15px;
+    font-weight: 15px;
+    color: white;
+    background-color: green;
+    border: 1px solid green;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.input {
+    width: 200px;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid silver;
+    box-sizing: border-box;
+}
+
+.addBtn:hover {
+    background-color: white;
+    color: green;
+}
+
+.table {
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 50px;
+    width: fit-content;
+}
+
+.tr {
+    border-bottom: 1px solid silver;
+    display: flex;
+    width: fit-content;
+}
+
+.tr:last-child {
+    border-bottom: 0;
+}
+
+.tr:hover:not(:first-child){
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tb,.th {
+    width: 200px;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px 0;
+    border: 1px solid gray;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.th {
+    font-weight: bold;
+    background-color: silver;
+}
+
+.status-text {
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.active {
+    color: green;
+}
+
+.btn {
+    font-size: 15px;
+    padding: 5px 10px;
+    width: fit-content;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.background-red {
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+}
+
+.background-red:hover {
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+}
+
+.background-green {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+}
+
+.background-green {
+    background-color: transparent;
+    color: green;
+    border: 1px solid green;
+}

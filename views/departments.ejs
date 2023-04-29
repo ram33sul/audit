@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/table.css" />
+    <title>Document</title>
+</head>
+<body>
+    <form class="add-type-of-audit" action="/admin/addDepartment" method="post" style="width: fit-content; margin: auto;">
+        <input placeholder="Audit type name" class="input" name="name"/>
+        <button class="addBtn" >
+            Add
+        </button>
+        <a href="/admin" style="border: 1px solid silver; padding: 10px; border-radius: 10px; color: black; width: fit-content; margin-top: 10px;">
+            go back
+        </a>
+    </form>
+    <div class="table">
+        <div class="tr">
+            <div class="th">
+                Id
+            </div>
+            <div class="th">
+                Name
+            </div>
+            <div class="th">
+                Status
+            </div>
+            <div class="th">
+                Actions
+            </div>
+        </div>
+        <% data.forEach((type) => { %>
+            <a href="/admin/departmentDetails?id=<%= type._id %>">
+                <div class="tr">
+                    <div class="tb">
+                        <%= type._id.toString().slice(13) %>
+                    </div>
+                    <div class="tb">
+                        <%= type.name %>
+                    </div>
+                    <div class="tb">
+                        <% if(type.status) { %>
+                            <div class="status-text active">
+                                Active
+                            </div>
+                        <% } else { %>
+                            <div class="status-text">
+                                Inactive
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="tb">
+                        <% if(type.status) { %>
+                        <a href="/admin/deactivateDepartment?id=<%= type._id %>">
+                            <div class="btn background-red">
+                                Deactivate
+                            </div>
+                        </a>
+                        <% } else { %>
+                        <a href="/admin/activateDepartment?id=<%= type._id %>">
+                            <div class="btn background-green">
+                                Activate
+                            </div>
+                        </a>
+                        <% } %>
+                        <a href="/admin/deleteDepartment?id=<%= type._id %>">
+                            <div class="btn background-red">
+                                Delete
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+</body>
+</html>

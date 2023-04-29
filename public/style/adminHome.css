@@ -1,0 +1,33 @@
+.container {
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px silver;
+    margin: auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    width: 95vw;
+    min-width: fit-content;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.button {
+    background-color: #0056b3;
+    width: 100%;
+    min-width: fit-content;
+    border: 0;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #0056b3;
+    transition: all 0.2s;
+    cursor: pointer;;
+}
+
+.button:hover {
+    background-color: white;
+    color: #0056b3;
+}
